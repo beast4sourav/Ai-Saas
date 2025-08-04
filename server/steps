@@ -1,0 +1,13 @@
+//1> create server.js
+//2> npm init -y
+//3> npm install express dotenv cors axios cloudinary multer
+// dotenv--for environment variables
+// cors-- to connect backend and frontend
+//axios-- to make api calls
+// cloudinary --to store the images
+//multer --to upload the images
+//npm install 
+// --save-dev nodemon
+// "server": "nodemon server.js",
+// "type": "module",
+// make the server in server.js
