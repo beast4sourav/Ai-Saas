@@ -1,11 +1,12 @@
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Environment variables file
 .env
-node_modules/
+
+# Files with credentials
+secrets.json
+
+# Log files
+*.log
+
+# Temporary build folder
+/build/
+node_modules
