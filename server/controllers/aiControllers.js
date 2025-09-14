@@ -137,7 +137,7 @@ export const generateImage = async (req, res) => {
 export const removeImageBackground = async (req, res) => {
   try {
     const { userId } = req.auth();
-    const { image } = req.file;
+    const  image  = req.file;
     const plan = req.plan;
 
     if (plan !== "premium") {
@@ -146,9 +146,6 @@ export const removeImageBackground = async (req, res) => {
         message: "This feature is only available for premium subscriptions.",
       });
     }
-
-    const formData = new FormData();
-    formData.append("prompt", prompt);
 
     const { secure_url } = await cloudinary.uploader.upload(image.path, {
       transformation: [
@@ -161,12 +158,12 @@ export const removeImageBackground = async (req, res) => {
 
     await Creation.create({
       userId,
-      prompt: "Remove background from image", // ✅ use as prompt description
-      secure_url, // ✅ only save image URL
+      prompt: "Remove background from image",
+      secure_url, // ✅ only save secure_url for images
       type: "image",
     });
 
-    res.json({ success: true, imageUrl: secure_url });
+    res.json({ success: true, content: secure_url });
   } catch (error) {
     console.error(error.message);
     res.json({ success: false, message: error.message });
@@ -177,7 +174,7 @@ export const removeImageObject = async (req, res) => {
     try {
       const { userId } = req.auth();
       const { object } = req.body;
-      const { image } = req.file;
+      const  image  = req.file;
       const plan = req.plan;
   
       if (plan !== "premium") {
@@ -195,8 +192,8 @@ export const removeImageObject = async (req, res) => {
   
       await Creation.create({
         userId,
-        prompt: "Remove background from image", // ✅ use as prompt description
-        imageUrl, // ✅ only save image URL
+        prompt: `Remove object: ${object}`,
+        secure_url: imageUrl, // ✅ only save image URL
         type: "image",
       });
   
@@ -240,9 +237,9 @@ export const removeImageObject = async (req, res) => {
   
       await Creation.create({
         userId,
-        prompt: "Review the uploaded resume", // ✅ use as prompt description
-        content, // ✅ only save image URL
-        type: "image",
+        prompt: "Review the uploaded resume",
+        content, // ✅ save the review content
+        type: "resume-review",
       });
   
       res.json({ success: true, content});

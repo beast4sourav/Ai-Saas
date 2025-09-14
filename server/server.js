@@ -24,9 +24,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to the server!");
 });
 
-app.use(requireAuth())
-
-
 app.use("/api/ai", aiRouter)
 app.use("/api/user", userRouter)
 

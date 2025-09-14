@@ -7,9 +7,10 @@ const creationSchema = new mongoose.Schema({
   content: { type: String },
   secure_url: { type: String },
   publish: { type: Boolean, default: false },
+  likes: { type: [String], default: [] },
   type: { 
     type: String, 
-    enum: ["article", "blog-title", "image", "remove-background", "remove-object"], 
+    enum: ["article", "blog-title", "image", "remove-background", "remove-object", "resume-review"], 
     default: "article" 
   },
 
